@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension version="3.0" type="plugin" group="vmpayment" method="upgrade">
+    <name>Hutkigrosh</name>
+    <author>esas.by</author>
+    <creationDate>Dec 18 2020</creationDate>
+    <authorEmail>support@hutkigrosh.by</authorEmail>
+    <license>http://opensource.org/licenses/MIT</license>
+    <version>1.0.0</version>
+    <description>Hutkigrosh (ERIP) Payment Plugin</description>
+    <scriptfile>install/install.php</scriptfile>
+    <files>
+        <filename plugin="hutkigrosh">hutkigrosh.php</filename>
+        <filename>init.php</filename>
+        <folder>vendor</folder>
+        <folder>esas</folder>
+        <folder>install</folder>
+    </files>
+<!--<vmconfig> эта секция будет сгенерирована автоматически на этапе уствновки плагина в CMS -->
+</extension>

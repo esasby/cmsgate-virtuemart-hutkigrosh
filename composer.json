@@ -22,7 +22,7 @@
   "require": {
     "php": ">= 5.6.0",
     "esas/cmsgate-hutkigrosh-lib": "~v1.13.1",
-    "esas/cmsgate-virtuemart-lib": "~v1.0.2",
+    "esas/cmsgate-virtuemart-lib": "~v1.1.0",
     "ext-dom": "*",
     "ext-simplexml": "*"
   },

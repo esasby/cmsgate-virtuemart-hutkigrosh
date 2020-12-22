@@ -6,14 +6,13 @@
  * Time: 11:22
  */
 
-namespace esas\cmsgate;
+namespace esas\cmsgate\hutkigrosh;
 
+use esas\cmsgate\CmsConnectorVirtuemart;
 use esas\cmsgate\descriptors\ModuleDescriptor;
 use esas\cmsgate\descriptors\VendorDescriptor;
 use esas\cmsgate\descriptors\VersionDescriptor;
-use esas\cmsgate\hutkigrosh\ConfigFieldsHutkigrosh;
-use esas\cmsgate\hutkigrosh\PaysystemConnectorHutkigrosh;
-use esas\cmsgate\hutkigrosh\RegistryHutkigrosh;
+use esas\cmsgate\hutkigrosh\view\client\CompletionPanelHutkigroshVirtuemart;
 use esas\cmsgate\view\admin\AdminViewFields;
 use esas\cmsgate\view\admin\ConfigFormVirtuemart;
 
@@ -47,7 +46,11 @@ class RegistryHutkigroshVirtuemart extends RegistryHutkigrosh
     {
         $managedFields = $this->getManagedFieldsFactory()->getManagedFieldsExcept(AdminViewFields::CONFIG_FORM_COMMON,
             [
-                ConfigFieldsHutkigrosh::shopName()
+                ConfigFieldsHutkigrosh::shopName(),
+                ConfigFieldsHutkigrosh::paymentMethodName(),
+                ConfigFieldsHutkigrosh::paymentMethodDetails(),
+                ConfigFieldsHutkigrosh::paymentMethodNameWebpay(),
+                ConfigFieldsHutkigrosh::paymentMethodDetailsWebpay(),
             ]);
         $configForm = new ConfigFormVirtuemart(
             AdminViewFields::CONFIG_FORM_COMMON,
@@ -57,24 +60,24 @@ class RegistryHutkigroshVirtuemart extends RegistryHutkigrosh
 
     public function getCompletionPanel($orderWrapper)
     {
-        return null; //not implementes
+        return new CompletionPanelHutkigroshVirtuemart($orderWrapper);
     }
 
     function getUrlAlfaclick($orderWrapper)
     {
-        return null; //not implementes
+        return "alfa.click"; //not implementes
     }
 
     function getUrlWebpay($orderWrapper)
     {
-        return null; //not implementes
+        return "web.pay"; //not implementes
     }
 
     public function createModuleDescriptor()
     {
         return new ModuleDescriptor(
             "hutkigrosh",
-            new VersionDescriptor("1.13.0", "2020-12-08"),
+            new VersionDescriptor("1.13.1", "2020-12-22"),
             "Прием платежей через ЕРИП (сервис Hutkirosh)",
             "https://bitbucket.esas.by/projects/CG/repos/cmsgate-virtuemart-hutkigrosh/browse",
             VendorDescriptor::esas(),

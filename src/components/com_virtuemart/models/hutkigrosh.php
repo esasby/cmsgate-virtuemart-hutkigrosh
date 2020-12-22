@@ -1,6 +1,6 @@
 <?php
 
-use esas\cmsgate\virtuemart\CmsgateModel;
+use esas\cmsgate\virtuemart\CmsgateModelVirtuemart;
 
 defined('_JEXEC') or die();
 
@@ -8,6 +8,6 @@ defined('_JEXEC') or die();
  * Наличие файла с таким именем и классом обязательно для подгрузки модели ядром joomla
  * Class VirtueMartModelHutkigrosh
  */
-class VirtueMartModelHutkigrosh extends CmsgateModel
+class VirtueMartModelHutkigrosh extends CmsgateModelVirtuemart
 {
 }

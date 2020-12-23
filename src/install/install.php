@@ -13,11 +13,6 @@ class plgVmpaymentHutkigroshInstallerScript
     {
     }
 
-    function uninstall($parent)
-    {
-
-    }
-
     function update($parent)
     {
 
@@ -29,7 +24,7 @@ class plgVmpaymentHutkigroshInstallerScript
             //вручную копируем файлы из временной папки, в папку components, иначе не сработают require_once
             self::preInstall();
             InstallHelperVirtuemart::generateVmConfig();
-            InstallHelperVirtuemart::dbAddPaymentMethod();
+            InstallHelperVirtuemart::dbPaymentMethodAdd();
             InstallHelperVirtuemart::dbActivateExtension();
         } catch (Exception $e) {
             $trace = Logger::getStackTrace($e);
@@ -47,7 +42,20 @@ class plgVmpaymentHutkigroshInstallerScript
         if (!JFolder::copy($installTmpPath, $newPath, "", true)) {
             throw new Exception('Can not copy folder from[' . $installTmpPath . '] to [' . $newPath . ']');
         }
+        self::req();
+    }
+
+    public static function req() {
         require_once(dirname(dirname(__FILE__)) . '/init.php');
+    }
+
+    public function uninstall($parent)
+    {
+        $ret = true;
+        self::req();
+        $ret = $ret && InstallHelperVirtuemart::dbPaymentMethodDelete();
+        $ret = $ret && InstallHelperVirtuemart::deleteFiles();
+        return $ret;
     }
 
 }

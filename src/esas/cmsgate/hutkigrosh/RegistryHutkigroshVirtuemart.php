@@ -12,6 +12,7 @@ use esas\cmsgate\CmsConnectorVirtuemart;
 use esas\cmsgate\descriptors\ModuleDescriptor;
 use esas\cmsgate\descriptors\VendorDescriptor;
 use esas\cmsgate\descriptors\VersionDescriptor;
+use esas\cmsgate\hutkigrosh\utils\RequestParamsHutkigrosh;
 use esas\cmsgate\hutkigrosh\view\client\CompletionPanelHutkigroshVirtuemart;
 use esas\cmsgate\view\admin\AdminViewFields;
 use esas\cmsgate\view\admin\ConfigFormVirtuemart;
@@ -42,6 +43,15 @@ class RegistryHutkigroshVirtuemart extends RegistryHutkigrosh
         return parent::getConfigForm();
     }
 
+    /**
+     * @return CmsConnectorVirtuemart
+     */
+    public function getCmsConnector()
+    {
+        return parent::getCmsConnector();
+    }
+
+
     public function createConfigForm()
     {
         $managedFields = $this->getManagedFieldsFactory()->getManagedFieldsExcept(AdminViewFields::CONFIG_FORM_COMMON,
@@ -51,6 +61,7 @@ class RegistryHutkigroshVirtuemart extends RegistryHutkigrosh
                 ConfigFieldsHutkigrosh::paymentMethodDetails(),
                 ConfigFieldsHutkigrosh::paymentMethodNameWebpay(),
                 ConfigFieldsHutkigrosh::paymentMethodDetailsWebpay(),
+                ConfigFieldsHutkigrosh::useOrderNumber(),
             ]);
         $configForm = new ConfigFormVirtuemart(
             AdminViewFields::CONFIG_FORM_COMMON,
@@ -70,7 +81,9 @@ class RegistryHutkigroshVirtuemart extends RegistryHutkigrosh
 
     function getUrlWebpay($orderWrapper)
     {
-        return "web.pay"; //not implementes
+        return CmsConnectorVirtuemart::generatePaySystemControllerUrl("complete") .
+            "&" . RequestParamsHutkigrosh::ORDER_NUMBER . "=" . $orderWrapper->getOrderNumber() .
+            "&" . RequestParamsHutkigrosh::BILL_ID . "=" . $orderWrapper->getExtId();
     }
 
     public function createModuleDescriptor()

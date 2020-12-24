@@ -28,10 +28,10 @@ class CompletionPanelHutkigroshVirtuemart extends CompletionPanelHutkigrosh
         return "btn btn-success";
     }
 
-    public function getCssClass4TabsGroup()
-    {
-        return "jshop checkout_payment_block";
-    }
+//    public function getCssClass4TabsGroup()
+//    {
+//        return "jshop checkout_payment_block";
+//    }
 
     public function getCssClass4Tab()
     {
@@ -74,12 +74,12 @@ class CompletionPanelHutkigroshVirtuemart extends CompletionPanelHutkigrosh
         return dirname(__FILE__) . "/hiddenRadio.css";
     }
 
-    public function addTabs()
-    {
-        return element::div(
-            attribute::id("table_payments"),
-            parent::addTabs());
-    }
+//    public function addTabs()
+//    {
+//        return element::div(
+//            attribute::id("table_payments"),
+//            parent::addTabs());
+//    }
 
 
     public function elementTab($key, $header, $body)

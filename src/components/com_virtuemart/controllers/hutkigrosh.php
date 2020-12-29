@@ -17,7 +17,9 @@
  * @version $Id: cart.php 3388 2011-05-27 13:50:18Z alatak $
  */
 // Check to ensure this file is included in Joomla!
+use esas\cmsgate\hutkigrosh\controllers\ControllerHutkigroshAlfaclick;
 use esas\cmsgate\hutkigrosh\controllers\ControllerHutkigroshCompletionPage;
+use esas\cmsgate\hutkigrosh\controllers\ControllerHutkigroshNotify;
 use esas\cmsgate\hutkigrosh\utils\RequestParamsHutkigrosh;
 use esas\cmsgate\Registry;
 use esas\cmsgate\utils\Logger;
@@ -64,6 +66,35 @@ class VirtueMartControllerHutkigrosh extends JControllerLegacy {
         } catch (Throwable $e) {
             Logger::getLogger("payment")->error("Exception:", $e);
             JFactory::getApplication()->enqueueMessage($e->getMessage(), 'error');
+        }
+    }
+
+    /**
+     * Выставляет счет в альфаклик
+     */
+    function alfaclick()
+    {
+        try {
+            $controller = new ControllerHutkigroshAlfaclick();
+            $controller->process();
+        } catch (Throwable $e) {
+            Logger::getLogger("alfaclick")->error("Exception: ", $e);
+        }
+    }
+
+
+    /**
+     * Callback, который вызывает сам ХуткиГрош для оповещение об оплате счета в ЕРИП
+     * Тут выполняется дополнительная проверка статуса счета на шлюза и при необходимости изменение его статус заказа
+     * в локальной БД
+     */
+    function notify()
+    {
+        try {
+            $controller = new ControllerHutkigroshNotify();
+            $controller->process();
+        } catch (Throwable $e) {
+            Logger::getLogger("callback")->error("Exception:", $e);
         }
     }
 }

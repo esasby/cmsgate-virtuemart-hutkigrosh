@@ -76,7 +76,7 @@ class RegistryHutkigroshVirtuemart extends RegistryHutkigrosh
 
     function getUrlAlfaclick($orderWrapper)
     {
-        return "alfa.click"; //not implementes
+        return CmsConnectorVirtuemart::generatePaySystemControllerUrl("alfaclick");
     }
 
     function getUrlWebpay($orderWrapper)
@@ -90,7 +90,7 @@ class RegistryHutkigroshVirtuemart extends RegistryHutkigrosh
     {
         return new ModuleDescriptor(
             "hutkigrosh",
-            new VersionDescriptor("1.13.1", "2020-12-22"),
+            new VersionDescriptor("1.13.2", "2020-12-29"),
             "Прием платежей через ЕРИП (сервис Hutkirosh)",
             "https://bitbucket.esas.by/projects/CG/repos/cmsgate-virtuemart-hutkigrosh/browse",
             VendorDescriptor::esas(),

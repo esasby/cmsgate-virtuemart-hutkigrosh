@@ -1,8 +1,11 @@
 <?php
 
+use esas\cmsgate\CmsConnectorVirtuemart;
 use esas\cmsgate\hutkigrosh\controllers\ControllerHutkigroshAddBill;
 use esas\cmsgate\hutkigrosh\controllers\ControllerHutkigroshCompletionPage;
+use esas\cmsgate\hutkigrosh\utils\RequestParamsHutkigrosh;
 use esas\cmsgate\Registry;
+use Joomla\CMS\Factory;
 
 defined('_JEXEC') or die;
 
@@ -39,7 +42,22 @@ class plgVMPaymentHutkigrosh extends vmPSPlugin
     {
         $orderWrapper = Registry::getRegistry()->getOrderWrapper($order['details']['BT']->virtuemart_order_id);
         $controller = new ControllerHutkigroshAddBill();
-        $controller->process($orderWrapper); //$order['details']['BT']->order_number;
+        $resp = $controller->process($orderWrapper);
+        if ($resp->hasError())
+            return false;
+
+        if (!class_exists('VirtueMartCart'))
+            require(JPATH_VM_SITE . DS . 'helpers' . DS . 'cart.php');
+        $cart = VirtueMartCart::getCart();
+        $cart->emptyCart();
+        /**
+         * На этом этапе мы только выполняем запрос к HG для добавления счета. Мы не показываем итоговый экран
+         * (с кнопками webpay и alfaclick), а выполняем автоматический редирект на step7
+         **/
+        $redirectParams = array(
+            RequestParamsHutkigrosh::BILL_ID => $resp->getBillId(),
+            RequestParamsHutkigrosh::ORDER_NUMBER => $orderWrapper->getOrderNumber());
+        Factory::getApplication()->redirect(CmsConnectorVirtuemart::generatePaySystemControllerPath("complete") . '&' . http_build_query($redirectParams));
     }
 
     function plgVmOnShowOrderBEPayment($virtuemart_order_id, $virtuemart_payment_id)
@@ -119,9 +137,6 @@ class plgVMPaymentHutkigrosh extends vmPSPlugin
     public function plgVmOnShowOrderFEPayment($virtuemart_order_id, $virtuemart_paymentmethod_id, &$payment_name)
     {
         $this->onShowOrderFE($virtuemart_order_id, $virtuemart_paymentmethod_id, $payment_name);
-        $controller = new ControllerHutkigroshCompletionPage();
-        $completionPanel = $controller->process($virtuemart_order_id);
-        $completionPanel->render();
     }
 
     //+

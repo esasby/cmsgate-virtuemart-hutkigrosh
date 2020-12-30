@@ -2,10 +2,10 @@
 <extension version="3.0" type="plugin" group="vmpayment" method="upgrade">
     <name>Hutkigrosh</name>
     <author>esas.by</author>
-    <creationDate>Dec 18 2020</creationDate>
+    <creationDate>Dec 30 2020</creationDate>
     <authorEmail>support@hutkigrosh.by</authorEmail>
     <license>http://opensource.org/licenses/MIT</license>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <description>Hutkigrosh (ERIP) Payment Plugin</description>
     <scriptfile>install/install.php</scriptfile>
     <files>

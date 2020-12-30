@@ -37,8 +37,8 @@ class plgVmpaymentHutkigroshInstallerScript
     public static function preInstall() {
         //вручную копируем файлы из временной папки, в папку components, т.к. для корректной работы cmsgate Registry
         //нужна Model, а она ищется ядром в JPATH_ADMINISTRATOR
-        $installTmpPath = dirname(dirname(__FILE__)) . '/components';
-        $newPath = JPATH_ADMINISTRATOR . '/components';
+        $installTmpPath = dirname(dirname(__FILE__)) . '/jpath_root';
+        $newPath = JPATH_ROOT;
         if (!JFolder::copy($installTmpPath, $newPath, "", true)) {
             throw new Exception('Can not copy folder from[' . $installTmpPath . '] to [' . $newPath . ']');
         }

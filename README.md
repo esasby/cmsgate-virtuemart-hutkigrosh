@@ -18,18 +18,15 @@
 
 Следите за анонсами о сроках отключения старого API и переходите на API v3 заранее (порядок перехода описан в разделе "[Одновременная работа и переход на API v3](#одновременная-работа-и-переход-на-api-v3)").
 
+Отдельная сборка API v3 обусловлена сменой поколения API сервиса, а не изменениями Joomla: внутри одной версии CMS обе сборки отличаются только поколением API.
+
+## Скачать
+
 Для каждой версии CMS используется свой файл сборки (.zip):
 
 | CMS | Сборка API v3 (рекомендуется) | Сборка предыдущего поколения |
 |---|---|---|
 | Joomla 3.x + VirtueMart 3.8 | [hutkigrosh_apiv3.zip](https://github.com/esasby/cmsgate-virtuemart-hutkigrosh/blob/master/hutkigrosh_apiv3.zip) | [hutkigrosh.zip](https://github.com/esasby/cmsgate-virtuemart-hutkigrosh/blob/master/hutkigrosh.zip) |
-
-Отдельная сборка API v3 обусловлена сменой поколения API сервиса, а не изменениями Joomla: внутри одной версии CMS обе сборки отличаются только поколением API.
-
-## Скачать
-
-- Joomla 3.x + VirtueMart 3.8, API v3 (рекомендуется): [hutkigrosh_apiv3.zip](https://github.com/esasby/cmsgate-virtuemart-hutkigrosh/blob/master/hutkigrosh_apiv3.zip) (v2.0.5)
-- Joomla 3.x + VirtueMart 3.8, предыдущее поколение: [hutkigrosh.zip](https://github.com/esasby/cmsgate-virtuemart-hutkigrosh/blob/master/hutkigrosh.zip) (v1.13.2, проверено на Joomla 3.9.23 + VirtueMart 3.8.6)
 
 ## Требования
 
